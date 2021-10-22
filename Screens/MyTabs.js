@@ -47,10 +47,7 @@ const tab=()=>({
 		paddingBottom: 10, 
 		marginTop: -5, 
 		marginBottom: -5
-		},
-	tabBarIconStyle:{
-		backgroundColor: "red"
-	}
+		}
 	})
 function HomeScreen(){
 	return(
