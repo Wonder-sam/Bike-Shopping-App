@@ -1,14 +1,15 @@
 import React from 'react'
-import {Text, View, Image, StyleSheet, ScrollView} from 'react-native'
+import {TouchableOpacity,Text, View, Image, StyleSheet, ScrollView} from 'react-native'
 import{AntDesign} from '@expo/vector-icons'
 import ProductData from './ProductData.js'
+
 
 function Cart(){
 	return(
 		<View style={styles.container}>
 		<View style={{flexDirection: "row", alignItems: "center", marginBottom: 20, justifyContent: "space-between", alignItems: "center"}}>
 			<View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-				<AntDesign name="arrowleft" size={24} color="black" />
+				<TouchableOpacity><AntDesign name="arrowleft" size={24} color="black" /></TouchableOpacity>
 			</View>
 			<View>
 				<Text style={{fontSize: 16, fontWeight: "bold"}}>Cart List</Text>
@@ -18,7 +19,7 @@ function Cart(){
 		</View>
 		<ScrollView>
 		{
-			ProductData.products.map((item,index)=>(
+			ProductData.cart.map((item,index)=>(
 				<View key={item.id} style={{flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
 					<View style={{flexDirection: "row", height: 120}}>
 						<Image source={item.image} style={styles.images}/>
@@ -31,9 +32,9 @@ function Cart(){
 					<View style={{justifyContent: "space-between", height: 100, paddingTop: 10, alignItems: "flex-end"}}>
 						<AntDesign name="delete" size={18} color="orange" />
 						<View style={{flexDirection: "row", alignItems: "center"}}>
-							<View style={styles.sub}><Text style={{color: "white", fontWeight: "bold"}}>-</Text></View>
-							<View style={styles.num}><Text style={{color: "black", fontSize: 20}}>1</Text></View>
-							<View style={styles.add}><Text style={{color: "white", fontWeight: "bold"}}>+</Text></View>
+							<TouchableOpacity style ={styles.sub}><Text style={{color: "white", fontWeight: "bold"}}>-</Text></TouchableOpacity>
+							<View style={styles.num}><Text style={{color: "black", fontSize: 20}}>{item.quantity}</Text></View>
+							<TouchableOpacity style={styles.add}><Text style={{color: "white", fontWeight: "bold"}}>+</Text></TouchableOpacity>
 						</View>
 					</View>
 				</View>)

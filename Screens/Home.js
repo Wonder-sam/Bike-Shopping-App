@@ -1,5 +1,5 @@
 import  React from 'react'
-import {Dimensions,View, StyleSheet, Text, Image, ScrollView} from 'react-native'
+import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView} from 'react-native'
 import {Ionicons, FontAwesome, AntDesign, EvilIcons} from '@expo/vector-icons'
 import Cart from './Cart.js'
 import ProductData from './ProductData.js'
@@ -12,8 +12,8 @@ function Home(){
 				<Ionicons name="ios-menu-outline" size={24} color = 'black' />
 				<FontAwesome name="motorcycle" size ={24} color="black" />
 				<View style={styles.right}>
-					<AntDesign name= "search1" size={20} color = "black" />
-					<Ionicons name="notifications-outline" size ={20} color = "black" />
+					<TouchableOpacity><AntDesign name= "search1" size={20} color = "black" /></TouchableOpacity>
+					<TouchableOpacity><Ionicons name="notifications-outline" size ={20} color = "black" /></TouchableOpacity>
 				</View>
 			</View>
 			<View style={{flexDirection: "row", alignItems: "center", marginBottom: 5, marginTop: 5}}>
@@ -26,7 +26,7 @@ function Home(){
 					{
 						ProductData.tabs.map((item,index)=>(
 							<View key={item.id} style={styles.tab}>
-								<Text>{item.tab}</Text>
+								<TouchableOpacity><Text>{item.tab}</Text></TouchableOpacity>
 							</View>)
 						)
 					}
@@ -133,20 +133,5 @@ const styles = StyleSheet.create({
 		justifyContent: "space-evenly",
 		flexWrap: "wrap",
 		paddingTop: 15,
-	},
-	mic: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		position: "absolute",
-		left: Dimensions.get('window').width - Dimensions.get('window').width/2,
-		top: Dimensions.get('window').height - 100,
-		backgroundColor: "black",
-		borderRadius: 50,
-		padding: 22,
-		paddingLeft: 25,
-		paddingRight: 25,
-		zIndex: 8
-		
-	},
+	}
 });
