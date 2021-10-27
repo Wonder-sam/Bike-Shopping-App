@@ -1,11 +1,18 @@
-import  React from 'react'
+import  React, {useState} from 'react'
 import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView} from 'react-native'
 import {Ionicons, FontAwesome, AntDesign, EvilIcons} from '@expo/vector-icons'
-import Cart from './Cart.js'
 import ProductData from './ProductData.js'
 
+const Home=({navigation})=>{
+	const [hTab, setHtab] = useState("All")
+	const switchTab=(tab)=>{
+		console.log("here")
+		setHtab(tab)
+		console.log(hTab)
+	}
+	
+	console.log(hTab)
 
-function Home(){
 	return(
 		<View style={styles.container}>
 			<View style={styles.topBar}>
@@ -26,7 +33,7 @@ function Home(){
 					{
 						ProductData.tabs.map((item,index)=>(
 							<View key={item.id} style={styles.tab}>
-								<TouchableOpacity><Text>{item.tab}</Text></TouchableOpacity>
+								<TouchableOpacity onPress={()=>switchTab(item.tab)}><Text>{item.tab}</Text></TouchableOpacity>
 							</View>)
 						)
 					}
@@ -37,14 +44,25 @@ function Home(){
 					<View style={styles.inside}>
 					{
 						ProductData.products.map((item, index)=>(
-							<View key = {item.id} style={styles.product}>
-								<View style = {styles.heart}>
-									<EvilIcons name="heart" size={24} color="black" />
-								</View>
-								<Image source={item.image} style={styles.images}/>
-								<Text style={styles.txt}>{item.name}</Text>
-								<Text style={styles.price}>{item.price}</Text>
-							</View>)
+								hTab== "All"?
+									<TouchableOpacity key = {item.id} style={styles.product} onPress={()=>navigation.navigate("ProductDetails",{data:item})}>
+										<View style = {styles.heart}>
+											<EvilIcons name="heart" size={24} color="black" />
+										</View>
+										<Image source={item.image} style={styles.images}/>
+										<Text style={styles.txt}>{item.name}</Text>
+										<Text style={styles.price}>{item.price}</Text>
+									</TouchableOpacity> :
+										item.type == hTab ? 
+											<TouchableOpacity key = {item.id} style={styles.product} onPress={()=>navigation.navigate("ProductDetails",{data:{item}})}>
+												<View style = {styles.heart}>
+													<EvilIcons name="heart" size={24} color="black" />
+												</View>
+												<Image source={item.image} style={styles.images}/>
+												<Text style={styles.txt}>{item.name}</Text>
+												<Text style={styles.price}>{item.price}</Text>
+											</TouchableOpacity> : null
+							)
 						)
 					}
 					</View>
