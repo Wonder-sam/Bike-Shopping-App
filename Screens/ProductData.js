@@ -53,7 +53,6 @@ const ProductData ={
 			tab: "Urban"
 		}
 	],
-
 	cart:[
 		{
 			id: 0,

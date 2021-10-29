@@ -1,10 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {TouchableOpacity,Text, View, Image, StyleSheet, ScrollView} from 'react-native'
 import{AntDesign} from '@expo/vector-icons'
 import ProductData from './ProductData.js'
 
 
 function Cart({navigation}){
+	const [remove, setRemove] = useState(0);
+	const [activity, setActivity] = useState(0);
+	const removeCartItem=(item)=>{
+		ProductData.cart.splice(ProductData.cart.indexOf(item),1);
+		setRemove(remove +1)
+	}
+	const dec=(data) =>{
+		let pos = ProductData.cart.indexOf(data)
+		ProductData.cart[pos].quantity ==1? null :ProductData.cart[pos].quantity -= 1
+		setActivity(activity+1)
+	}
+	const inc=(data) =>{
+		let pos = ProductData.cart.indexOf(data)
+		ProductData.cart[pos].quantity += 1
+		setActivity(activity+1)
+	}
+
 	return(
 		<View style={styles.container}>
 		<View style={{flexDirection: "row", alignItems: "center", marginBottom: 20, justifyContent: "space-between", alignItems: "center"}}>
@@ -32,11 +49,17 @@ function Cart({navigation}){
 						</View>
 					</View>
 					<View style={{justifyContent: "space-between", height: 100, paddingTop: 10, alignItems: "flex-end"}}>
-						<AntDesign name="delete" size={18} color="orange" />
+						<TouchableOpacity onPress={()=>removeCartItem(item)}>
+							<AntDesign name="delete" size={18} color="orange" />
+						</TouchableOpacity>
 						<View style={{flexDirection: "row", alignItems: "center"}}>
-							<TouchableOpacity style ={styles.sub}><Text style={{color: "white", fontWeight: "bold"}}>-</Text></TouchableOpacity>
+							<TouchableOpacity style ={styles.sub} onPress ={()=>dec(item)}>
+								<Text style={{color: "white", fontWeight: "bold"}}>-</Text>
+							</TouchableOpacity>
 							<View style={styles.num}><Text style={{color: "black", fontSize: 20}}>{item.quantity}</Text></View>
-							<TouchableOpacity style={styles.add}><Text style={{color: "white", fontWeight: "bold"}}>+</Text></TouchableOpacity>
+							<TouchableOpacity style={styles.add} onPress ={()=>inc(item)}>
+								<Text style={{color: "white", fontWeight: "bold"}}>+</Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>)

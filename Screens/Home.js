@@ -1,27 +1,55 @@
 import  React, {useState} from 'react'
 import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView} from 'react-native'
 import {Ionicons, FontAwesome, AntDesign, EvilIcons} from '@expo/vector-icons'
+import {SearchBar} from 'react-native-elements'
 import ProductData from './ProductData.js'
+import { Dimensions } from 'react-native'
 
 const Home=({navigation})=>{
 	const [hTab, setHtab] = useState("All")
-	const switchTab=(tab)=>{
-		console.log("here")
-		setHtab(tab)
-		console.log(hTab)
+	const [search, setSearch] = useState(false)
+	const [searchKey, setSearchKey] = useState("")
+	const [load, setLoad] = useState(false)
+
+	const filter =(txt)=>{
+		setSearchKey(txt);
+		setLoad(!load)
 	}
-	
-	console.log(hTab)
+	const switchTab=(tab)=>{
+		setHtab(tab)
+	}
 
 	return(
-		<View style={styles.container}>
-			<View style={styles.topBar}>
-				<Ionicons name="ios-menu-outline" size={24} color = 'black' />
-				<FontAwesome name="motorcycle" size ={24} color="black" />
-				<View style={styles.right}>
-					<TouchableOpacity><AntDesign name= "search1" size={20} color = "black" /></TouchableOpacity>
-					<TouchableOpacity><Ionicons name="notifications-outline" size ={20} color = "black" /></TouchableOpacity>
+		<View style={styles.container}>			
+			<View >
+			{
+				search == false ?
+				<View style={styles.topBar}>
+					<Ionicons name="ios-menu-outline" size={24} color = 'black' />
+					<FontAwesome name="motorcycle" size ={24} color="black" />
+					<View style={styles.right}>
+						<TouchableOpacity onPress={()=>setSearch(true)}>
+							<AntDesign name= "search1" size={20} color = "black" />
+						</TouchableOpacity>
+						<TouchableOpacity>
+							<Ionicons name="notifications-outline" size ={20} color = "black" />
+						</TouchableOpacity>
+					</View>
 				</View>
+					:
+						<SearchBar containerStyle ={styles.searchbar}
+						inputContainerStyle ={styles.searchbarInput}
+						inputStyle={{color: "white"}}
+						platform="ios"
+						lightTheme
+						round
+						showCancel={search}
+						placeholder ="Type here"
+						onChangeText ={filter}
+						showLoading={load}
+						value = {searchKey}
+						onCancel ={()=>setSearch(false)} />
+			}
 			</View>
 			<View style={{flexDirection: "row", alignItems: "center", marginBottom: 5, marginTop: 5}}>
 				<Text style={styles.title1}>{ProductData.title1}</Text>
@@ -41,7 +69,7 @@ const Home=({navigation})=>{
 			</View>
 			<View style={styles.content}>
 				<ScrollView>
-					<View style={styles.inside}>
+					<View style={styles.products}>
 					{
 						ProductData.products.map((item, index)=>(
 								hTab== "All"?
@@ -83,11 +111,23 @@ const styles = StyleSheet.create({
 	topBar:{
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "center"
+		alignItems: "center",
+		backgroundColor: "#eeedf2",
+		marginLeft: -17,
+		padding: 10,
+		width: Dimensions.get("screen").width
 	},
 	right:{
 		flexDirection: "row",
 		justifyContent: "space-between"
+	},
+	searchbar:{
+		width: 300,
+		height: 5,
+		backgroundColor: 'white',
+		borderStyle: 'dotted',
+	},
+	searchbarInput:{
 	},
 	title1:{
 		fontSize: 14,
@@ -145,8 +185,9 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		flex: 1,
+		marginLeft: -20
 	},
-	inside:{
+	products:{
 		flexDirection: "row",
 		justifyContent: "space-evenly",
 		flexWrap: "wrap",

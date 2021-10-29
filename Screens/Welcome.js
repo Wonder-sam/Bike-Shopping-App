@@ -7,7 +7,7 @@ function Welcome({navigation}){
 		<View style={styles.container}>
 			<Image source={require("../Images/cover.jpg")} style={styles.image}/>
 			<Text style={styles.welcome}>Welcome to</Text>
-			<Text style={styles.bike}>Power Bike Shop</Text>
+			<Text style={styles.bike}>Wonder Bikes</Text>
 			<View>
 				<TouchableOpacity
 					onPress={()=>navigation.navigate("Login")}
