@@ -1,6 +1,6 @@
 import  React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {View, TouchableOpacity,StyleSheet} from 'react-native'
+import {View,StyleSheet} from 'react-native'
 import{FontAwesome} from '@expo/vector-icons'
 import Cart from './Cart.js'
 import Home from './Home.js'

@@ -1,9 +1,8 @@
 import  React, {useState} from 'react'
-import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView} from 'react-native'
+import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView,Keyboard,Dimensions} from 'react-native'
 import {Ionicons, FontAwesome, AntDesign, EvilIcons} from '@expo/vector-icons'
 import {SearchBar} from 'react-native-elements'
 import ProductData from './ProductData.js'
-import { Dimensions } from 'react-native'
 
 const Home=({navigation})=>{
 	const [hTab, setHtab] = useState("All")
@@ -20,7 +19,7 @@ const Home=({navigation})=>{
 	}
 
 	return(
-		<View style={styles.container}>			
+		<View style={styles.container} onStartShouldSetResponder={()=>Keyboard.dismiss()}>			
 			<View >
 			{
 				search == false ?
@@ -82,7 +81,7 @@ const Home=({navigation})=>{
 										<Text style={styles.price}>{item.price}</Text>
 									</TouchableOpacity> :
 										item.type == hTab ? 
-											<TouchableOpacity key = {item.id} style={styles.product} onPress={()=>navigation.navigate("ProductDetails",{data:{item}})}>
+											<TouchableOpacity key = {item.id} style={styles.product} onPress={()=>navigation.navigate("ProductDetails",{data:item})}>
 												<View style = {styles.heart}>
 													<EvilIcons name="heart" size={24} color="black" />
 												</View>

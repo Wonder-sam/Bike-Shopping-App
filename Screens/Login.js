@@ -1,11 +1,21 @@
-import React from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, ImageBackground, Dimensions} from 'react-native'
+import React, {useState, useRef} from 'react'
+import {View, Text, TouchableOpacity, StyleSheet, ImageBackground, Dimensions, Keyboard} from 'react-native'
 import {Input} from 'react-native-elements'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 const Login=({navigation})=>{
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const passwordRef = useRef();
+    const usernameHandler=(txt)=>{
+        setUsername(txt)
+    }
+    const passwordHandler=(txt)=>{
+        setPassword(txt)
+    }
     return(
-        <View>
+        <View onStartShouldSetResponder={()=>Keyboard.dismiss()}>
         <ImageBackground source={require("../Images/topimg.jpg")}
         resizeMode="cover"
         style ={styles.topImage}>
@@ -14,15 +24,25 @@ const Login=({navigation})=>{
             <Input
             containerStyle={styles.field}
             placeholder =" Username"
+            value={username}
             leftIcon ={<FontAwesome5 name="user-alt" size={24} color="black" />}
-            onChangeText ={()=>usernameHandler}
+            textContentType ={"username"}
+            returnKeyType="next"
+            onSubmitEditing={()=>passwordRef.current.focus()}
+            onChangeText ={usernameHandler}
             />
 
              <Input
             placeholder =" Password"
+            value={password}
             containerStyle={styles.field}
             leftIcon={<Ionicons name="key" size={24} color="black" />}
-            onChangeText ={()=>usernameHandler}
+            secureTextEntry={true}
+            textContentType ={"password"}
+            ref ={passwordRef}
+            returnKeyType="go"
+            onSubmitEditing={()=>navigation.navigate("HomeScreen")}
+            onChangeText ={passwordHandler}
             />
             <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("HomeScreen")}>
                 <Text style={{color: "white"}}>Login</Text>
