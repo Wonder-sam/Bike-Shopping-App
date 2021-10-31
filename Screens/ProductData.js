@@ -9,28 +9,28 @@ const ProductData ={
 			id: 0,
 			name: "Pinarello bike",
 			image: require("../Images/pinarelloo.png"),
-			price: "1,700.00",
+			price: 1700.00,
 			type: "Mountain"
 		},
 		{
 			id: 1,
 			name: "Brompton bike",
 			image:require("../Images/brompton.png"),
-			price: "1,500.00",
+			price: 1500.00,
 			type: "RoadBike"
 		},
 		{
 			id: 2,
 			name: "Schwinn bike",
 			image: require("../Images/schwinn.png"),
-			price: "1,200.00",
+			price: 1200.00,
 			type: "Mountain"
 		},
 		{
 			id: 3,
 			name: "Norco bike",
 			image: require("../Images/norco.png"),
-			price: "9800.00",
+			price: 9800.00,
 			type: "RoadBike"
 		}
 		
@@ -58,7 +58,7 @@ const ProductData ={
 			id: 0,
 			name: "Pinarello bike",
 			image: require("../Images/pinarelloo.png"),
-			price: "1,700.00",
+			price: 1700.00,
 			quantity: 1,
 			type: "Mountain"
 		},
@@ -66,7 +66,7 @@ const ProductData ={
 			id: 1,
 			name: "Brompton bike",
 			image:require("../Images/brompton.png"),
-			price: "1,500.00",
+			price: 1500.00,
 			quantity: 1,
 			type: "RoadBike"
 		},
@@ -74,7 +74,7 @@ const ProductData ={
 			id: 2,
 			name: "Schwinn bike",
 			image: require("../Images/schwinn.png"),
-			price: "1,200.00",
+			price: 1200.00,
 			quantity: 1,
 			type: "Mountain"
 		},
@@ -82,7 +82,7 @@ const ProductData ={
 			id: 3,
 			name: "Norco bike",
 			image: require("../Images/norco.png"),
-			price: "9800.00",
+			price: 9800.00,
 			quantity: 1,
 			type: "RoadBike"
 		}

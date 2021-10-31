@@ -43,7 +43,9 @@ const Home=({navigation})=>{
 			{
 				search == false ?
 				<View style={styles.topBar}>
-					<Ionicons name="ios-menu-outline" size={24} color = 'black' />
+					<TouchableOpacity>
+						<Ionicons name="ios-menu-outline" size={24} color = 'black' />
+					</TouchableOpacity>
 					<FontAwesome name="motorcycle" size ={24} color="black" />
 					<View style={styles.right}>
 						<TouchableOpacity onPress={()=>setSearch(true)}>

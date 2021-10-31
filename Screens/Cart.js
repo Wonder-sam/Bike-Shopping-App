@@ -13,14 +13,27 @@ function Cart({navigation}){
 	}
 	const dec=(data) =>{
 		let pos = ProductData.cart.indexOf(data)
-		ProductData.cart[pos].quantity ==1? null :ProductData.cart[pos].quantity -= 1
+		if(ProductData.cart[pos].quantity >1){
+			ProductData.cart[pos].quantity -= 1
+			ProductData.cart[pos].price -= ProductData.products[pos].price
+		} 
 		setActivity(activity+1)
 	}
 	const inc=(data) =>{
 		let pos = ProductData.cart.indexOf(data)
 		ProductData.cart[pos].quantity += 1
+		ProductData.cart[pos].price += ProductData.products[pos].price
 		setActivity(activity+1)
 	}
+	const total =()=>{
+		let totalPrice =0
+		for(let i=0; i<ProductData.cart.length; i++){
+			totalPrice += ProductData.cart[i].price
+		}
+		return totalPrice
+	};
+
+	let totalPrice = total()
 	
 	useEffect(()=>{
 		navigation.addListener("focus",()=>{
@@ -71,6 +84,14 @@ function Cart({navigation}){
 				</View>)
 			)
 		}
+		<View>
+			<View style = {styles.total}>
+				<Text>Total: {totalPrice}</Text>
+			</View>
+			<TouchableOpacity onPress={()=>navigation.navigate("Order")} style={styles.order}>
+				<Text style={{fontWeight: "bold", fontSize: 18, color: 'white'}}>Place Order</Text>
+			</TouchableOpacity>
+		</View>
 		</ScrollView>
 		</View>
 	)
@@ -120,5 +141,18 @@ const styles = StyleSheet.create({
 		padding: 10, 
 		borderRadius: 20,
 		justifyContent: "center",
+	},
+	total:{
+		padding: 10,
+		marginLeft: 230,
+		backgroundColor: "orange",
+		alignItems: "flex-end",
+		marginBottom: 5
+	},
+	order:{
+		padding: 10,
+		backgroundColor: "orange",
+		alignItems: "center",
+		borderRadius: 10,
 	}
 })
