@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {TouchableOpacity,Text, View, Image, StyleSheet, ScrollView} from 'react-native'
 import{AntDesign} from '@expo/vector-icons'
 import ProductData from './ProductData.js'
@@ -21,7 +21,13 @@ function Cart({navigation}){
 		ProductData.cart[pos].quantity += 1
 		setActivity(activity+1)
 	}
-
+	
+	useEffect(()=>{
+		navigation.addListener("focus",()=>{
+			setActivity(activity+1)
+		})
+	},[{navigation}])
+		
 	return(
 		<View style={styles.container}>
 		<View style={{flexDirection: "row", alignItems: "center", marginBottom: 20, justifyContent: "space-between", alignItems: "center"}}>
@@ -32,7 +38,7 @@ function Cart({navigation}){
 			</View>
 			<View>
 				<Text style={{fontSize: 16, fontWeight: "bold"}}>Cart List</Text>
-				<Text style={{color: "grey"}}>(3 items)</Text>
+				<Text style={{color: "grey"}}>({ProductData.cart.length} items)</Text>
 			</View>
 			<Text>    </Text>
 		</View>

@@ -1,9 +1,11 @@
 import  React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {View,StyleSheet} from 'react-native'
+import {View,StyleSheet, BackHandler} from 'react-native'
 import{FontAwesome} from '@expo/vector-icons'
 import Cart from './Cart.js'
 import Home from './Home.js'
+import ProductData from './ProductData.js'
+import ProductDetails from './ProductDetails.js'
 
 const Tab = createBottomTabNavigator();
 const tabs=({route})=>({
@@ -36,7 +38,7 @@ const tabs=({route})=>({
 				return <View style={stylepick}><FontAwesome name={iconName} size={size} color={color} /></View>
 			}
 			})
-const tab=()=>({
+const micTab=()=>({
 	tabBarItemStyle:{
 		backgroundColor: "white", 
 		borderRadius: 900, 
@@ -49,13 +51,23 @@ const tab=()=>({
 		marginBottom: -5
 		}
 	})
+	const pdTab=()=>({
+		tabBarItemStyle:{
+			display: "none"
+			}
+		})
+	const handleBackButton=()=>{
+		BackHandler.exitApp();
+		return true;
+	}
 function HomeScreen(){
 	return(
-		<Tab.Navigator initialRouteName="Home" backBehavior="initialRoute" 
+		<Tab.Navigator initialRouteName="Home" backBehavior="history" 
 			screenOptions={tabs}>
 			<Tab.Screen name="Home" component={Home} />
-			<Tab.Screen name="Mic" component={Home} options={tab}/>
-			<Tab.Screen name="Cart" component={Cart} />
+			<Tab.Screen name="Mic" component={Home} options={micTab}/>
+			<Tab.Screen name="Cart" component={Cart}  options={{tabBarBadge: ProductData.cart.length}}/>
+			 <Tab.Screen name="ProductDetails" component={ProductDetails} options={pdTab} />
 		</Tab.Navigator>
 		)
 }

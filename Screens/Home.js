@@ -1,4 +1,4 @@
-import  React, {useState} from 'react'
+import  React, {useState, useEffect} from 'react'
 import {TouchableOpacity,View, StyleSheet, Text, Image, ScrollView,Keyboard,Dimensions} from 'react-native'
 import {Ionicons, FontAwesome, AntDesign, EvilIcons} from '@expo/vector-icons'
 import {SearchBar} from 'react-native-elements'
@@ -9,6 +9,7 @@ const Home=({navigation})=>{
 	const [search, setSearch] = useState(false)
 	const [searchKey, setSearchKey] = useState("")
 	const [load, setLoad] = useState(false)
+	const [added, setAdded] = useState(0)
 
 	const filter =(txt)=>{
 		setSearchKey(txt);
@@ -17,6 +18,24 @@ const Home=({navigation})=>{
 	const switchTab=(tab)=>{
 		setHtab(tab)
 	}
+	const addToCart=(data)=>{
+		for(let i=0; i<ProductData.cart.length;i++){
+			if(ProductData.cart[i].id == data.id){
+				alert("item already in cart")
+				return
+			}	
+		} 
+		ProductData.cart.unshift(data)
+		ProductData.cart[0].quantity =1
+		alert("item successfully added to cart")
+		setAdded(added + 1)
+	}
+
+	useEffect(()=>{
+		navigation.addListener("focus",()=>{
+			setAdded(added + 0)
+		})
+	},[{navigation}])
 
 	return(
 		<View style={styles.container} onStartShouldSetResponder={()=>Keyboard.dismiss()}>			
@@ -79,6 +98,9 @@ const Home=({navigation})=>{
 										<Image source={item.image} style={styles.images}/>
 										<Text style={styles.txt}>{item.name}</Text>
 										<Text style={styles.price}>{item.price}</Text>
+										<TouchableOpacity style={styles.btn} onPress={()=>addToCart(item)}>
+											<Text style={{fontSize: 12}}>Add to Cart</Text>
+										</TouchableOpacity>
 									</TouchableOpacity> :
 										item.type == hTab ? 
 											<TouchableOpacity key = {item.id} style={styles.product} onPress={()=>navigation.navigate("ProductDetails",{data:item})}>
@@ -88,6 +110,9 @@ const Home=({navigation})=>{
 												<Image source={item.image} style={styles.images}/>
 												<Text style={styles.txt}>{item.name}</Text>
 												<Text style={styles.price}>{item.price}</Text>
+												<TouchableOpacity style={styles.btn} onPress={()=>addToCart(item)}>
+													<Text style={{fontSize: 15}}>Add to Cart</Text>
+												</TouchableOpacity>
 											</TouchableOpacity> : null
 							)
 						)
@@ -156,7 +181,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		alignItems: "center",
 		borderRadius: 10,
-		paddingTop: 15,
+		paddingTop: 5,
 		paddingBottom: 10
 	},
 	heart:{
@@ -190,6 +215,17 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-evenly",
 		flexWrap: "wrap",
-		paddingTop: 15,
-	}
+		paddingTop: 10,
+	},
+	btn:{
+        backgroundColor: 'orange',
+        padding: 10,
+        height: 30,
+        width: 100,
+        borderRadius: 10,
+		marginTop: 3,
+        justifyContent: "center",
+        alignItems: "center",
+        
+    }
 });

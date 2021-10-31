@@ -59,28 +59,32 @@ const ProductData ={
 			name: "Pinarello bike",
 			image: require("../Images/pinarelloo.png"),
 			price: "1,700.00",
-			quantity: 1
+			quantity: 1,
+			type: "Mountain"
 		},
 		{
 			id: 1,
 			name: "Brompton bike",
 			image:require("../Images/brompton.png"),
 			price: "1,500.00",
-			quantity: 1
+			quantity: 1,
+			type: "RoadBike"
 		},
 		{
 			id: 2,
 			name: "Schwinn bike",
 			image: require("../Images/schwinn.png"),
 			price: "1,200.00",
-			quantity: 1
+			quantity: 1,
+			type: "Mountain"
 		},
 		{
 			id: 3,
 			name: "Norco bike",
 			image: require("../Images/norco.png"),
 			price: "9800.00",
-			quantity: 1
+			quantity: 1,
+			type: "RoadBike"
 		}
 	]
 }
