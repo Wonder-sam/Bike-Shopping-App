@@ -18,7 +18,6 @@ const Order =({navigation})=>{
         for(let i=0; i<ProductData.cart.length; i++){
             table.push([ProductData.cart[i].name,ProductData.cart[i].price,ProductData.cart[i].quantity,ProductData.cart[i].type]);
             }
-            console.log(table)
         }
         firsupdatet()
         useEffect(()=>{

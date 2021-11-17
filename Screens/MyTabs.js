@@ -7,6 +7,7 @@ import Home from './Home.js'
 import ProductData from './ProductData.js'
 import ProductDetails from './ProductDetails.js'
 import Order from './Order.js'
+import Settings from './Settings'
 
 const Tab = createBottomTabNavigator();
 const tabs=({route})=>({
@@ -64,9 +65,9 @@ function HomeScreen(){
 		<Tab.Navigator initialRouteName="Home" backBehavior="history" 
 			screenOptions={tabs}>
 			<Tab.Screen name="Home" component={Home} />
-			{/* <Tab.Screen name="Mic" component={Home} options={micTab}/> */}
 			<Tab.Screen name="Cart" component={Cart}  options={{tabBarBadge: ProductData.cart.length}}/>
 			 <Tab.Screen name="ProductDetails" component={ProductDetails} options={pdTab} />
+			 <Tab.Screen name="Settings" component={Settings} options={pdTab} />
 			 <Tab.Screen name="Order" component={Order} options={pdTab} />
 			 {/* <Tab.Screen name="CheckOut" component={Checkout} options={pdTab} /> */}
 		</Tab.Navigator>

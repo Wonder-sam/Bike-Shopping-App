@@ -43,8 +43,8 @@ const Home=({navigation})=>{
 			{
 				search == false ?
 				<View style={styles.topBar}>
-					<TouchableOpacity>
-						<Ionicons name="ios-menu-outline" size={24} color = 'black' />
+					<TouchableOpacity onPress={()=>navigation.navigate("Settings")}>
+						<Ionicons name="settings" size={24} color="black" />
 					</TouchableOpacity>
 					<FontAwesome name="motorcycle" size ={24} color="black" />
 					<View style={styles.right}>
@@ -113,7 +113,7 @@ const Home=({navigation})=>{
 												<Text style={styles.txt}>{item.name}</Text>
 												<Text style={styles.price}>{item.price}</Text>
 												<TouchableOpacity style={styles.btn} onPress={()=>addToCart(item)}>
-													<Text style={{fontSize: 15}}>Add to Cart</Text>
+													<Text style={{fontSize: 12}}>Add to Cart</Text>
 												</TouchableOpacity>
 											</TouchableOpacity> : null
 							)
