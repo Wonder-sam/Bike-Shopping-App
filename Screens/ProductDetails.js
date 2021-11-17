@@ -1,13 +1,22 @@
-import React from 'react'
-import {View,Text, TouchableOpacity, Image, StyleSheet} from 'react-native'
+import React,{useState, useEffect} from 'react'
+import {View,Text, TouchableOpacity, Image, StyleSheet, Dimensions} from 'react-native'
 import{AntDesign} from '@expo/vector-icons'
 
 function ProductDetails({navigation, route}){
-    const {id, name, image, price, type} = route.params.data;
+
+    const {id, name, image, price, type, colours} = route.params.data;
+    
+    let current = colours[0].color;
+    const [productColor, setProductColor] = useState(null);
+    useEffect(()=>{
+		navigation.addListener("focus",()=>{
+			setProductColor(current)
+		})
+	},[{navigation}])
 
         return(
             <View style={styles.container}>
-                <View style={{flexDirection: "row", alignItems: "center", marginBottom: 20, justifyContent: "space-between", alignItems: "center"}}>
+                <View style={{flexDirection: "row", alignItems: "center", marginBottom: 20, justifyContent: "space-between", alignItems: "center",paddingHorizontal: 20}}>
 			        <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
 			    	    <TouchableOpacity onPress={()=>navigation.goBack()}>
                             <AntDesign name="arrowleft" size={24} color="black" />
@@ -20,20 +29,24 @@ function ProductDetails({navigation, route}){
 		        </View>
 
                 <View style={styles.product}>
-                    <View style ={styles.image}><Image source={image} /></View>
+                    <View style={styles.imageContainer}><Image source={productColor} style ={styles.image}/></View>
                     <View style={styles.details}>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontSize: 16, color:'grey'}}>Name: </Text>
                             <Text style={styles.detail}>{name}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontSize: 16, color:'grey'}}>Type: </Text>
                             <Text style={styles.detail}>{type}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontSize: 16, color:'grey'}}>Cost: </Text>
                             <Text style={styles.detail}>{price}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            {
+                                colours.map((item,index)=>(
+                                    <View key={item.id} style={styles.colBtn}>
+                                        <TouchableOpacity style={ {backgroundColor: item.name, width: 100}}
+                                        onPress={()=>setProductColor(item.color)}>
+                                            <Text style={styles.colors}>{item.name}</Text>
+                                        </TouchableOpacity>
+                                     </View>)
+                                )
+                            }
                         </View>
+
                     </View>
                 </View>
             </View>
@@ -46,26 +59,34 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
         paddingTop: 50,
-		paddingHorizontal: 20,
     },
     product:{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center'
     },
     image:{
-        backgroundColor: '#eeedf2',
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: -5
+        width: Dimensions.get('window').width, 
+        height: 300,
+        resizeMode: 'contain'
     },
     details: {
         justifyContent: 'space-evenly',
+        alignItems: 'center',
         marginLeft: 10,
-        height: 150
+        height: 150,
     },
     detail: {
-        fontSize: 16
+        fontSize: 20,
+        fontStyle: "italic",
+        fontFamily: "Times New Roman"
+    },
+    colBtn:{
+        marginRight: 5
+    },
+    colors:{
+        color: "grey",
+       padding: 10,
     }
 })
 export default ProductDetails
