@@ -38,7 +38,7 @@ function ProductDetails({navigation, route}){
                             {
                                 colours.map((item,index)=>(
                                     <View key={item.id} style={styles.colBtn}>
-                                        <TouchableOpacity style={ {backgroundColor: item.name, width: 100}}
+                                        <TouchableOpacity style={ {backgroundColor: "orange", width: 100, borderRadius: 20}}
                                         onPress={()=>setProductColor(item.color)}>
                                             <Text style={styles.colors}>{item.name}</Text>
                                         </TouchableOpacity>
@@ -62,12 +62,19 @@ const styles = StyleSheet.create({
     },
     product:{
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center'
+    },
+    imageContainer:{
+        height: 300,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        borderColor: 'orange',
+        borderWidth: 3,
+        borderTopWidth: 0,
+        borderStyle: 'solid',
     },
     image:{
         width: Dimensions.get('window').width, 
-        height: 300,
+        height: 290,
         resizeMode: 'contain'
     },
     details: {
@@ -82,11 +89,13 @@ const styles = StyleSheet.create({
         fontFamily: "Times New Roman"
     },
     colBtn:{
-        marginRight: 5
+        marginRight: 5,
     },
     colors:{
-        color: "grey",
+        color: "white",
        padding: 10,
+       textAlign: "center",
+       fontWeight: "bold"
     }
 })
 export default ProductDetails

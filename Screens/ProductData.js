@@ -14,17 +14,17 @@ const ProductData ={
 			colours:[
 				{
 					id: 0, 
-					name: "red",
+					name: "Red",
 					color: require("../Images/pinRed.jpg"),
 				},
 				{
 					id: 1, 
-					name: "white",
+					name: "White",
 					color: require("../Images/pinWhite.jpg"),
 				},
 				{
 					id: 2, 
-					name: "blue",
+					name: "Blue",
 					color: require("../Images/pinBlue.jpg"),
 				}
 			]
@@ -38,18 +38,18 @@ const ProductData ={
 			colours:[
 				{
 					id: 0, 
-					name: "red",
+					name: "Red",
 					color: require("../Images/bromRed.png"),
 				},
 				{
 					id: 1, 
-					name: "black",
+					name: "Black",
 					color: require("../Images/bromBlack.jpg"),
 				},
 				
 				{
 					id: 2, 
-					name: "green",
+					name: "Green",
 					color: require("../Images/bromGreen.jpg"),
 				}
 			]
@@ -63,17 +63,17 @@ const ProductData ={
 			colours:[
 				{
 					id: 0, 
-					name: "blue",
+					name: "Blue",
 					color: require("../Images/schBlue.jpg"),
 				},
 				{
 					id: 1, 
-					name: "black",
+					name: "Black",
 					color: require("../Images/schBlack.jpg"),
 				},
 				{
 					id: 2, 
-					name: "white",
+					name: "White",
 					color: require("../Images/schWhite.jpg"),
 				}
 			]
@@ -87,18 +87,18 @@ const ProductData ={
 			colours:[
 				{
 					id: 0, 
-					name: "orange",
+					name: "Orange",
 					color: require("../Images/norcoOrange.jpg"),
 					
 				},
 				{
 					id: 1, 
-					name: "black",
+					name: "Black",
 					color: require("../Images/norcoBlack.jpg"),
 				},
 				{
 					id: 2, 
-					name: "blue",
+					name: "Blue",
 					color: require("../Images/norcoBlue.jpg"),
 				}
 			]
