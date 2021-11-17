@@ -26,7 +26,9 @@ function Welcome({navigation}){
 			</View>
 			<View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 10}}>
 				<Text>Don't have an account?</Text>
-				<Text style ={{color: "orange", fontSize: 16}}>Signup</Text>
+				<TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
+					<Text style ={{color: "orange", fontSize: 16}}>Signup</Text>
+				</TouchableOpacity>
 			</View>
 		</View>
 	)
